@@ -1,93 +1,59 @@
 # 🔍 Semantic Insight Explorer
 
-> A production-quality NLP web application that compares the *meaning* of multiple ideas, phrases, or sentences using a single pretrained transformer model — no training, no APIs, no preprocessing.
+A production-quality Streamlit web application for **semantic text similarity analysis** using a single free pretrained NLP embedding model, evaluated against **Paul's Critical Thinking Standards**.
 
 ---
 
-## 📌 Project Overview
+## 📌 Overview
 
-**Semantic Insight Explorer** is a Streamlit application built for a university NLP assignment. Instead of comparing just two sentences, it allows users to input any number of items (words, phrases, or full sentences) and performs an exhaustive pairwise semantic similarity analysis using cosine similarity on transformer embeddings.
+Semantic Insight Explorer encodes your texts using `sentence-transformers/all-MiniLM-L6-v2` and computes pairwise cosine similarity — entirely locally, with no paid API and no preprocessing.
 
-**Model used:** `sentence-transformers/all-MiniLM-L6-v2`  
-**Embedding dimension:** 384  
-**Parameters:** ~22 M  
-**Licence:** Apache 2.0  
+The results are presented through:
 
-No OpenAI API, Gemini API, HuggingFace Inference API, or any paid service is used. Everything runs locally.
-
----
-
-## ✨ Features
-
-| Feature | Description |
-|---|---|
-| **Multi-input comparison** | Enter as many words, phrases, or sentences as needed |
-| **Similarity matrix** | Full N×N cosine similarity table with colour gradient |
-| **Top 10 pairs** | Ranked list of the most similar pairs with exact 4 d.p. scores |
-| **Bar chart** | Interactive Plotly bar chart of top similar pairs |
-| **Heatmap** | Annotated Plotly heatmap of the complete similarity matrix |
-| **PCA scatter** | 2D projection of 384-dim embeddings for visual clustering |
-| **Network graph** | Semantic network where edges appear when similarity > threshold |
-| **Search** | Select any sentence and find its top 5 closest matches |
-| **CSV download** | Export results to CSV with one click |
-| **Critical thinking** | Auto-generated commentary covering all 7 Paul's standards |
-| **Cached model** | `st.cache_resource` ensures the model loads only once |
-| **Error handling** | Informative warnings for empty input or single-sentence input |
+- A **similarity matrix** (with exact 4-decimal-place scores)
+- **Top 10 most similar pairs**
+- **Three Plotly graphs** aligned to Paul's Critical Thinking Standards
+- An auto-generated **Paul's Standards evaluation** grounded in the actual results
+- **Professional notes** referencing real similarity findings
 
 ---
 
-## 🛠 Installation
+## 🚀 Quick Start
 
-### Prerequisites
-
-- Python 3.10 or higher
-- pip
-
-### Steps
+### 1. Clone or download the project
 
 ```bash
-# 1. Clone the repository
-git clone https://github.com/your-username/semantic-insight-explorer.git
+git clone <your-repo-url>
 cd semantic-insight-explorer
+```
 
-# 2. (Recommended) Create a virtual environment
+### 2. (Recommended) Create a virtual environment
+
+```bash
 python -m venv venv
-source venv/bin/activate      # Windows: venv\Scripts\activate
+source venv/bin/activate       # macOS / Linux
+venv\Scripts\activate.bat      # Windows
+```
 
-# 3. Install dependencies
+### 3. Install dependencies
+
+```bash
 pip install -r requirements.txt
 ```
 
----
+> **First run:** the model (~90 MB) is automatically downloaded from Hugging Face and cached locally. Subsequent runs use the cache.
 
-## 🚀 How to Run
+### 4. Run the application
 
 ```bash
 streamlit run app.py
 ```
 
-The application will open automatically in your browser at `http://localhost:8501`.
+The browser opens automatically at `http://localhost:8501`.
 
 ---
 
-## ☁️ Deployment on Streamlit Community Cloud
-
-1. Push the project to a **public GitHub repository**.
-2. Go to [share.streamlit.io](https://share.streamlit.io) and sign in with GitHub.
-3. Click **New app**.
-4. Select your repository, branch (`main`), and set the main file path to `app.py`.
-5. Click **Deploy**.
-
-Streamlit Community Cloud will automatically:
-- Install all packages from `requirements.txt`
-- Download the model from HuggingFace on first run (cached for subsequent runs)
-- Serve the app on a public URL
-
-> **Note:** The first cold start may take 1–2 minutes while the model (~90 MB) is downloaded. Subsequent loads are fast thanks to `st.cache_resource`.
-
----
-
-## 📂 Project Structure
+## 📁 Project Structure
 
 ```
 semantic-insight-explorer/
@@ -98,19 +64,99 @@ semantic-insight-explorer/
 
 ---
 
+## 🧠 Model
 
-## 🔭 Future Improvements
+| Property       | Value                              |
+|----------------|------------------------------------|
+| **Name**       | `sentence-transformers/all-MiniLM-L6-v2` |
+| **Source**     | [Hugging Face 🤗](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2) |
+| **Dimensions** | 384                                |
+| **Parameters** | ~22 M                              |
+| **License**    | Apache 2.0                         |
 
-- **More models:** Allow users to switch between multiple sentence-transformer models (e.g. `all-mpnet-base-v2`, `multi-qa-MiniLM-L6-cos-v1`) and compare their outputs.
-- **3D PCA / UMAP:** Extend the embedding visualisation to 3D or use UMAP for more faithful topology preservation.
-- **File upload:** Accept `.txt` or `.csv` files as input so users can analyse large corpora.
-- **Clustering:** Add automatic K-Means or DBSCAN clustering on the embeddings and colour-code the PCA/network graphs.
-- **Multilingual support:** Switch to `paraphrase-multilingual-MiniLM-L12-v2` to handle non-English inputs.
-- **Sentence highlighting:** Highlight specific keywords that drive high similarity scores.
-- **Threshold animation:** Animate the network graph as the similarity threshold sweeps from 0 to 1.
+The model is loaded once via `st.cache_resource` and reused across all interactions.
 
 ---
 
-## 📄 Licence
+## 📊 Features
 
-This project is released for educational purposes under the MIT Licence.
+### User Input
+- Enter any number of words, phrases, sentences, or short paragraphs
+- One text per line
+- Blank lines are automatically ignored
+
+### Output Tabs
+| Tab | Contents |
+|-----|----------|
+| 🗂 Similarity Matrix | Full cosine similarity matrix · 4 decimal places · CSV download |
+| 🏆 Top Pairs | Top 10 most similar pairs · CSV download |
+| 📈 Graphs | Three Plotly graphs (see below) |
+| 🧠 Paul's Standards | Expandable evaluation for all seven standards |
+| 📝 Professional Notes | Result-specific notes for each standard |
+
+### Graphs
+
+#### Graph 1 — Top Similarity Scores (Bar Chart)
+Horizontal bar chart of the most similar pairs.
+**Supports:** Precision & Significance
+
+#### Graph 2 — Similarity Heatmap
+Full pairwise cosine similarity matrix visualised as a heatmap.
+**Supports:** Accuracy & Relevance
+
+#### Graph 3 — Paul's Critical Thinking Evaluation
+Horizontal bar chart showing auto-estimated percentages for all seven Paul standards:
+- Clarity · Accuracy · Precision · Relevance · Logic · Significance · Fairness
+
+Scores are **derived from the actual analysis** (input volume, score spread, pair strength, etc.) — not randomly assigned.
+
+---
+
+## 📐 Paul's Critical Thinking Standards
+
+| Standard | What it measures in this app |
+|---|---|
+| **Clarity** | Sufficient and distinguishable input texts |
+| **Accuracy** | Unmodified pretrained model inference |
+| **Precision** | Exact 4-decimal scores; score spread |
+| **Relevance** | Graphs directly reflect similarity results |
+| **Logic** | High-similarity pairs are semantically coherent |
+| **Significance** | Strongest pair is clearly identified |
+| **Fairness** | Uniform treatment; transformer bias acknowledged |
+
+---
+
+## ⚙️ Technical Notes
+
+- **No preprocessing** — texts are passed verbatim to the model
+- **No model training** — weights are frozen
+- **No paid API** — everything runs locally
+- **Caching** — model loaded once per session via `st.cache_resource`
+- **Error handling** — warnings shown for missing or single-text input
+
+---
+
+## 🖥️ System Requirements
+
+| Component | Minimum |
+|---|---|
+| Python | 3.10 + |
+| RAM | 4 GB (8 GB recommended) |
+| Disk | ~500 MB (model cache) |
+| GPU | Not required (CPU inference) |
+
+---
+
+## 📄 License
+
+This project is released under the **MIT License**.  
+The embedded model (`all-MiniLM-L6-v2`) is licensed under **Apache 2.0**.
+
+---
+
+## 🙏 Acknowledgements
+
+- [Sentence Transformers](https://www.sbert.net/) by UKP Lab
+- [Streamlit](https://streamlit.io/)
+- [Plotly](https://plotly.com/)
+- Richard Paul's Framework for Critical Thinking
