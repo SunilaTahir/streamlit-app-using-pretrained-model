@@ -108,6 +108,14 @@ st.markdown("""
     /* Hide Streamlit branding */
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
+
+    /* Paul's Critical Thinking - make expander text black */
+    .stExpander div[data-testid="stMarkdownContainer"] p,
+    .stExpander div[data-testid="stMarkdownContainer"] li,
+    .stExpander div[data-testid="stMarkdownContainer"] span,
+    .stExpander div[data-testid="stMarkdownContainer"] strong {
+        color: #000000 !important;
+}
 </style>
 """, unsafe_allow_html=True)
 
