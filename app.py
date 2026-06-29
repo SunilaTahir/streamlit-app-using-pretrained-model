@@ -4,7 +4,6 @@ A production-quality Streamlit app for semantic text similarity analysis.
 Uses sentence-transformers/all-MiniLM-L6-v2 for embeddings.
 No preprocessing, cleaning, stemming, or model training is performed.
 """
-!pip install matplotlib
 
 import streamlit as st
 import pandas as pd
