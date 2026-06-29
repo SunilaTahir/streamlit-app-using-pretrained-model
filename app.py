@@ -477,8 +477,10 @@ def fig_similarity_heatmap(sim_matrix: np.ndarray, labels: list[str]) -> go.Figu
             texttemplate="%{text}",
             textfont=dict(size=10, color="white"),
             colorbar=dict(
-                title="Similarity",
-                titlefont=dict(color=TEXT_COLOR),
+                title=dict(
+                    text="Similarity",
+                    font=dict(color=TEXT_COLOR)
+                 ),
                 tickfont=dict(color=TEXT_COLOR),
                 bgcolor=PLOT_BG,
                 bordercolor=GRID_COLOR,
