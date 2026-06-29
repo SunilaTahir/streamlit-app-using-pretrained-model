@@ -190,7 +190,9 @@ def plot_top_pairs_bar(top_df: pd.DataFrame) -> go.Figure:
         xaxis_tickangle=-35,
         plot_bgcolor="#FFFFFF",
         paper_bgcolor="#FFFFFF",
-        font=dict(family="Inter, sans-serif", size=13),
+        font=dict(family="Inter, sans-serif", size=13, color="#1A1A2E"),
+        xaxis=dict(tickfont=dict(color="#1A1A2E", size=12)),
+        yaxis=dict(tickfont=dict(color="#1A1A2E", size=12)),
         margin=dict(b=140),
     )
     return fig
@@ -214,9 +216,10 @@ def plot_heatmap(sim_df: pd.DataFrame) -> go.Figure:
         title="Cosine Similarity Heatmap",
         plot_bgcolor="#FFFFFF",
         paper_bgcolor="#FFFFFF",
-        font=dict(family="Inter, sans-serif", size=12),
+        font=dict(family="Inter, sans-serif", size=12, color="#1A1A2E"),
+        xaxis=dict(tickfont=dict(color="#1A1A2E", size=12), tickangle=-40),
+        yaxis=dict(tickfont=dict(color="#1A1A2E", size=12)),
         margin=dict(l=160, b=160),
-        xaxis_tickangle=-40,
     )
     return fig
 
@@ -238,6 +241,7 @@ def plot_pca_scatter(texts: list[str], coords: np.ndarray) -> go.Figure:
             line=dict(width=1, color="white"),
         ),
         hovertemplate="<b>%{text}</b><br>PC1: %{x:.3f}<br>PC2: %{y:.3f}<extra></extra>",
+        textfont=dict(color="#1A1A2E", size=13, family="Inter, sans-serif"),
     ))
     fig.update_layout(
         title="2D Embedding Space (PCA)",
@@ -245,7 +249,9 @@ def plot_pca_scatter(texts: list[str], coords: np.ndarray) -> go.Figure:
         yaxis_title="Principal Component 2",
         plot_bgcolor="#F8F9FC",
         paper_bgcolor="#FFFFFF",
-        font=dict(family="Inter, sans-serif", size=12),
+        font=dict(family="Inter, sans-serif", size=12, color="#1A1A2E"),
+        xaxis=dict(tickfont=dict(color="#1A1A2E", size=12), title_font=dict(color="#1A1A2E")),
+        yaxis=dict(tickfont=dict(color="#1A1A2E", size=12), title_font=dict(color="#1A1A2E")),
     )
     return fig
 
