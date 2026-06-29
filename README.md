@@ -98,20 +98,6 @@ semantic-insight-explorer/
 
 ---
 
-## 📸 Screenshots
-
-> *(Add screenshots of your running app here after deployment)*
-
-| Section | Preview |
-|---|---|
-| Hero + Input | `screenshot_input.png` |
-| Summary Metrics | `screenshot_metrics.png` |
-| Heatmap | `screenshot_heatmap.png` |
-| Network Graph | `screenshot_network.png` |
-| PCA Scatter | `screenshot_pca.png` |
-| Critical Thinking | `screenshot_critical.png` |
-
----
 
 ## 🔭 Future Improvements
 
